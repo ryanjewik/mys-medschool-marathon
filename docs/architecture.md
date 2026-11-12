@@ -57,8 +57,10 @@ The frontend (`web/`) and the Lambda (`api/`) are already written and depend on 
   correct `Content-Type`s.
 - **DynamoDB table:** partition key `id` (string). One item per school with
   `id`, `name`, `sort_order` (number), `done` (bool), and optionally `interview_date` (`"YYYY-MM-DD"`).
-- **Lambda:** runtime `nodejs22.x`, handler `handler.handler`, code zipped from `api/`
-  (leave out `node_modules`, `test`, `package*.json`). Environment variable `TABLE_NAME`.
+- **Lambda:** runtime `python3.13`, handler `handler.handler`, code zipped from `api/`
+  (leave out `tests/`, `.venv/`, `__pycache__/`, `.pytest_cache/`, `.ruff_cache/`,
+  `requirements-dev.txt`, `pyproject.toml`). boto3 is built into the runtime, so nothing
+  else needs bundling. Environment variable `TABLE_NAME`.
   Its IAM role needs `dynamodb:Scan` and `dynamodb:UpdateItem` on the table.
 
 Generate the real graph from your code once it exists:

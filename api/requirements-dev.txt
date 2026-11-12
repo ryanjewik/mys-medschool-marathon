@@ -1,0 +1,3 @@
+# Local development and tests only. The Lambda runtime already includes boto3.
+boto3>=1.44
+pytest>=9.2

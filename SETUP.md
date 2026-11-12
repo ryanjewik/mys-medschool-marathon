@@ -16,13 +16,13 @@ cd mys-medschool-marathon
 - [ ] Install the CLIs:
 
 ```bash
-brew install terraform tflint pre-commit awscli node
+brew install terraform tflint pre-commit awscli node python@3.13
 ```
 
 - [ ] Check they work:
 
 ```bash
-terraform version && tflint --version && pre-commit --version && aws --version && node --version
+terraform version && tflint --version && pre-commit --version && aws --version && node --version && python3.13 --version
 ```
 
 ## 3. Turn on the code-quality hooks
@@ -75,13 +75,18 @@ If you used SSO with a named profile, run `export AWS_PROFILE=<profile-name>` be
 
 ## 7. Try it locally, then build the frontend
 
-- [ ] Run the Lambda tests (no AWS needed, DynamoDB is stubbed):
+- [ ] Set up Python for the Lambda and run its tests (no AWS needed, DynamoDB is faked):
 
 ```bash
-cd api && npm install && npm test
+cd api
+python3.13 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest
 ```
 
-- [ ] Run the site locally against a fake in-memory API (no AWS needed), then open http://localhost:5173:
+- [ ] Run the site locally against a fake in-memory API (no AWS needed), then open http://localhost:5173.
+  `npm install` here is also what the TypeScript pre-commit hook needs:
 
 ```bash
 cd web && npm install && npm run dev

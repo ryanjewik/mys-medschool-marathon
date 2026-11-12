@@ -14,8 +14,8 @@ Browser ─► CloudFront ─┬─► S3          (Vite static site + config.js
 | Folder | What's in it |
 |---|---|
 | `infra/` | Terraform (to be written; plan in `docs/architecture.md`) |
-| `api/` | Lambda backend: `GET /api/schools`, `PUT /api/schools/{id}` |
-| `web/` | Vite frontend (vanilla JS + canvas-confetti), with a mock API for local dev |
+| `api/` | Lambda backend in Python: `GET /api/schools`, `PUT /api/schools/{id}` |
+| `web/` | Vite + TypeScript frontend (canvas-confetti), with a mock API for local dev |
 | `docs/architecture.md` | The Terraform plan and what the app expects from it |
 
 **Getting started:** see [SETUP.md](SETUP.md).

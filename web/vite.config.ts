@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { mockApi } from "./dev/mock-api.js";
+import { mockApi } from "./dev/mock-api.ts";
 
 // npm run dev                                             -> fake in-memory API, no AWS needed
 // API_TARGET=https://dxxxx.cloudfront.net npm run dev     -> the real deployed backend

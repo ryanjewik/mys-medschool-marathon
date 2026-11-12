@@ -1,8 +1,14 @@
 import confetti from "canvas-confetti";
-import { getConfig, listSchools, setDone } from "./api.js";
+import { getConfig, listSchools, setDone } from "./api";
+import type { AppConfig, School } from "./types";
 import "./style.css";
 
-const $ = (id) => document.getElementById(id);
+function $(id: string): HTMLElement {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(`#${id} is missing from index.html`);
+  return el;
+}
+
 const els = {
   title: $("title"),
   barFill: $("bar-fill"),
@@ -12,20 +18,26 @@ const els = {
   toast: $("toast"),
 };
 
-let config = {};
-let schools = [];
+interface Row {
+  li: HTMLLIElement;
+  box: HTMLInputElement;
+  meta: HTMLSpanElement;
+}
+
+let config: AppConfig = {};
+let schools: School[] = [];
 
 // "2026-11-20" -> "Nov 20". Built from parts so it doesn't shift a day in US time zones.
-function formatDate(isoDate) {
+function formatDate(isoDate: string): string {
   const [y, m, d] = isoDate.slice(0, 10).split("-").map(Number);
   return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
 // Rows are built once, then updated in place, so the checkbox she just tapped
 // (and keyboard focus) survives every re-render.
-const rows = new Map();
+const rows = new Map<string, Row>();
 
-function createRow(school) {
+function createRow(school: School): void {
   const li = document.createElement("li");
   li.className = "school";
 
@@ -52,8 +64,8 @@ function createRow(school) {
   rows.set(school.id, { li, box, meta });
 }
 
-function updateRow(school) {
-  const { li, box, meta } = rows.get(school.id);
+function updateRow(school: School): void {
+  const { li, box, meta } = rows.get(school.id)!;
   li.classList.toggle("done", school.done);
   box.checked = school.done;
   if (school.done && school.done_at) meta.textContent = `Done ${formatDate(school.done_at)} ✓`;
@@ -61,7 +73,7 @@ function updateRow(school) {
   else meta.textContent = "";
 }
 
-function render() {
+function render(): void {
   const done = schools.filter((s) => s.done).length;
   const total = schools.length;
   const allDone = total > 0 && done === total;
@@ -73,7 +85,7 @@ function render() {
   schools.forEach(updateRow);
 }
 
-function burstFrom(element) {
+function burstFrom(element: HTMLElement): void {
   const r = element.getBoundingClientRect();
   confetti({
     particleCount: 80,
@@ -84,7 +96,7 @@ function burstFrom(element) {
   });
 }
 
-function bigCelebration() {
+function bigCelebration(): void {
   const end = Date.now() + 2000;
   (function frame() {
     confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, disableForReducedMotion: true });
@@ -93,16 +105,18 @@ function bigCelebration() {
   })();
 }
 
-let toastTimer;
-function showToast(message) {
+let toastTimer: ReturnType<typeof setTimeout> | undefined;
+function showToast(message: string): void {
   els.toast.textContent = message;
   els.toast.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => (els.toast.hidden = true), 4000);
+  toastTimer = setTimeout(() => {
+    els.toast.hidden = true;
+  }, 4000);
 }
 
 // Optimistic: update the screen right away, roll back if the save fails.
-async function toggle(school, box) {
+async function toggle(school: School, box: HTMLInputElement): Promise<void> {
   const done = box.checked;
   const before = { ...school };
   Object.assign(school, { done, done_at: done ? new Date().toISOString() : null });
@@ -122,7 +136,7 @@ async function toggle(school, box) {
   render();
 }
 
-async function init() {
+async function init(): Promise<void> {
   try {
     [config, schools] = await Promise.all([getConfig(), listSchools()]);
   } catch (err) {

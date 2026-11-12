@@ -8,3 +8,9 @@ infra/build/
 # Web
 node_modules/
 web/dist/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
