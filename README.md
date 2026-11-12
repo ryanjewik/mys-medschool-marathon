@@ -13,10 +13,10 @@ Browser ─► CloudFront ─┬─► S3          (Vite static site + config.js
 
 | Folder | What's in it |
 |---|---|
-| `infra/` | Terraform: S3, CloudFront, Lambda, DynamoDB, IAM, a budget alert |
+| `infra/` | Terraform (to be written; plan in `docs/architecture.md`) |
 | `api/` | Lambda backend: `GET /api/schools`, `PUT /api/schools/{id}` |
 | `web/` | Vite frontend (vanilla JS + canvas-confetti), with a mock API for local dev |
-| `docs/architecture.md` | How the Terraform resources depend on each other |
+| `docs/architecture.md` | The Terraform plan and what the app expects from it |
 
 **Getting started:** see [SETUP.md](SETUP.md).
 

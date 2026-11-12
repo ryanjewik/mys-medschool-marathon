@@ -67,16 +67,11 @@ aws sts get-caller-identity
 
 If you used SSO with a named profile, run `export AWS_PROFILE=<profile-name>` before running Terraform.
 
-## 6. Fill in your variables
+## 6. Write the Terraform
 
-- [ ] Copy the example file:
-
-```bash
-cp infra/terraform.tfvars.example infra/terraform.tfvars
-```
-
-- [ ] Edit `infra/terraform.tfvars`: her name, the real school list, and your email for budget alerts.
-  This file is git-ignored on purpose. Keep it out of GitHub.
+- [ ] Write it in `infra/`, following `docs/architecture.md`
+- [ ] Put real values (her name, the school list, your email) in `infra/terraform.tfvars`.
+  It's git-ignored on purpose, so keep it out of GitHub.
 
 ## 7. Try it locally, then build the frontend
 

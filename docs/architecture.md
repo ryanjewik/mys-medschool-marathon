@@ -1,6 +1,7 @@
 # Terraform architecture
 
-Each box is a `.tf` file in `infra/` and the resources it contains.
+The plan for the Terraform you'll write in `infra/`. Each box is a `.tf` file and the
+resources it should contain.
 An arrow means "uses a value from": Terraform reads these references to decide
 creation order, so arrows run from what is created first to what is created later.
 
@@ -44,7 +45,23 @@ creation order, so arrows run from what is created first to what is created late
   resource from the bucket; otherwise the two would wait on each other.
 - `versions.tf` and `variables.tf` aren't drawn; they feed everything.
 
-Generate the real graph from the code:
+## What the app code expects from your Terraform
+
+The frontend (`web/`) and the Lambda (`api/`) are already written and depend on these:
+
+- **One URL for everything:** CloudFront serves the site from S3 and sends `/api/*` to the
+  Lambda. The frontend calls `/api/schools` with relative paths, so there's no API URL to configure.
+- **`/config.json` in the bucket:** `{"herName": "...", "finalMessage": "..."}`. The page
+  reads it on load.
+- **The built site:** the contents of `web/dist/` (from `npm run build`), uploaded with
+  correct `Content-Type`s.
+- **DynamoDB table:** partition key `id` (string). One item per school with
+  `id`, `name`, `sort_order` (number), `done` (bool), and optionally `interview_date` (`"YYYY-MM-DD"`).
+- **Lambda:** runtime `nodejs22.x`, handler `handler.handler`, code zipped from `api/`
+  (leave out `node_modules`, `test`, `package*.json`). Environment variable `TABLE_NAME`.
+  Its IAM role needs `dynamodb:Scan` and `dynamodb:UpdateItem` on the table.
+
+Generate the real graph from your code once it exists:
 
 ```bash
 terraform -chdir=infra graph | dot -Tsvg > docs/graph.svg
