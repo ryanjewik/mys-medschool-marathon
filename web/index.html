@@ -12,24 +12,7 @@
     />
   </head>
   <body>
-    <main>
-      <header>
-        <p class="eyebrow">Med School Marathon</p>
-        <h1 id="title">Congrats! 🩺</h1>
-        <p class="lede">Check off each school as you finish it.</p>
-      </header>
-
-      <section class="progress" aria-live="polite">
-        <div class="bar" aria-hidden="true"><div id="bar-fill" class="bar-fill"></div></div>
-        <p id="progress-text">Loading…</p>
-      </section>
-
-      <p id="banner" class="banner" hidden></p>
-
-      <ul id="schools" class="schools"></ul>
-
-      <p id="toast" class="toast" role="status" hidden></p>
-    </main>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

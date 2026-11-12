@@ -1,3 +1,4 @@
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { mockApi } from "./dev/mock-api.ts";
 
@@ -6,7 +7,7 @@ import { mockApi } from "./dev/mock-api.ts";
 const target = process.env.API_TARGET;
 
 export default defineConfig({
-  plugins: target ? [] : [mockApi()],
+  plugins: target ? [react()] : [react(), mockApi()],
   server: target
     ? {
         proxy: {
