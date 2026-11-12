@@ -7,8 +7,8 @@ Everything here is a one-time step on your own machine (macOS + Homebrew assumed
 - [ ] Clone the repo:
 
 ```bash
-git clone https://github.com/ryanjewik/mys-med-school-marathon.git
-cd mys-med-school-marathon
+git clone https://github.com/ryanjewik/mys-medschool-marathon.git
+cd mys-medschool-marathon
 ```
 
 ## 2. Install tools
