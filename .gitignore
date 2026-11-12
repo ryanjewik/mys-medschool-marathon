@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+infra/build/
+
+# Web
+node_modules/
+web/dist/

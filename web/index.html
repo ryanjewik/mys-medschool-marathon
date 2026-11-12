@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#fdf6f0" />
+    <title>My's Med School Marathon 🩺</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>"
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Med School Marathon</p>
+        <h1 id="title">Congrats! 🩺</h1>
+        <p class="lede">Check off each school as you finish it.</p>
+      </header>
+
+      <section class="progress" aria-live="polite">
+        <div class="bar" aria-hidden="true"><div id="bar-fill" class="bar-fill"></div></div>
+        <p id="progress-text">Loading…</p>
+      </section>
+
+      <p id="banner" class="banner" hidden></p>
+
+      <ul id="schools" class="schools"></ul>
+
+      <p id="toast" class="toast" role="status" hidden></p>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

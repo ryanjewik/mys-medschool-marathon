@@ -1,0 +1,10 @@
+# Copy to terraform.tfvars (git-ignored) and fill in.
+her_name      = "My"
+budget_email  = "you@example.com"
+final_message = "Every interview done. I'm so proud of you."
+
+schools = [
+  { id = "school-a", name = "School A", interview_date = "2026-11-18" },
+  { id = "school-b", name = "School B", interview_date = "2026-11-21" },
+  { id = "school-c", name = "School C" },
+]
