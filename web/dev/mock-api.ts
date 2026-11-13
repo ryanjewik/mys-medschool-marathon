@@ -1,6 +1,7 @@
 // Dev-only stand-in for the Lambda + DynamoDB + Terraform-generated config.json.
 // Same routes and response shapes as ../api, data lives in memory (resets on restart).
 // Never part of the production build.
+import { readFileSync } from "node:fs";
 import type { ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import type { AppConfig, School } from "../src/types";
@@ -10,12 +11,8 @@ const config: AppConfig = {
   finalMessage: "Every interview done. I'm so proud of you.",
 };
 
-const schools: School[] = [
-  { id: "school-a", name: "School of Medicine A", interview_date: "2026-11-03", sort_order: 0, done: true, done_at: "2026-11-03T18:00:00Z" },
-  { id: "school-b", name: "University B College of Medicine", interview_date: "2026-11-14", sort_order: 1, done: false },
-  { id: "school-c", name: "C Medical School", interview_date: "2026-11-20", sort_order: 2, done: false },
-  { id: "school-d", name: "D School of Medicine", sort_order: 3, done: false },
-];
+// The real list, shared with Terraform so the two can't drift apart.
+const schools: School[] = JSON.parse(readFileSync(new URL("../../data/schools.json", import.meta.url), "utf8"));
 
 export function mockApi(): Plugin {
   return {

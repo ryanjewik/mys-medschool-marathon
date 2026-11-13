@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { getConfig, listSchools, setDone } from "./api";
 import { bigCelebration, burstFrom } from "./confetti";
+import { Cats } from "./components/Cats";
+import { CelebrationMusic } from "./components/CelebrationMusic";
 import { ProgressBar } from "./components/ProgressBar";
 import { SchoolItem } from "./components/SchoolItem";
+import { paintingFor } from "./paintings";
+import { playTongue } from "./sounds";
 import type { AppConfig, School } from "./types";
 
 export default function App() {
@@ -50,6 +54,7 @@ export default function App() {
 
     setSchools(replace({ ...before, done, done_at: done ? new Date().toISOString() : null }));
     if (done) {
+      playTongue();
       burstFrom(origin);
       if (schools.every((s) => (s.id === id ? done : s.done))) bigCelebration();
     }
@@ -68,40 +73,51 @@ export default function App() {
   const allDone = !!schools && schools.length > 0 && doneCount === schools.length;
 
   return (
-    <main>
-      <header>
-        <p className="eyebrow">Med School Marathon</p>
-        <h1>{title}</h1>
-        <p className="lede">Check off each school as you finish it.</p>
-      </header>
-
-      {schools ? (
-        <ProgressBar done={doneCount} total={schools.length} />
-      ) : (
-        <p id="progress-text" className="status">
-          {loadFailed ? "Couldn't load the list. Try refreshing." : "Loading…"}
-        </p>
-      )}
-
+    <>
       {allDone && (
-        <p id="banner" className="banner">
-          🎉 {config.finalMessage ?? "You did it!"}
-        </p>
+        <>
+          <CelebrationMusic />
+          <Cats />
+        </>
       )}
 
-      {schools && (
-        <ul className="schools">
-          {schools.map((school) => (
-            <SchoolItem key={school.id} school={school} onToggle={toggle} />
-          ))}
-        </ul>
-      )}
+      <main>
+        <section className="intro">
+          <header>
+            <p className="eyebrow">Med School Marathon</p>
+            <h1>{title}</h1>
+            <p className="lede">Check off each school as you finish it.</p>
+          </header>
+
+          {schools ? (
+            <ProgressBar done={doneCount} total={schools.length} />
+          ) : (
+            <p id="progress-text" className="status">
+              {loadFailed ? "Couldn't load the list. Try refreshing." : "Loading…"}
+            </p>
+          )}
+
+          {allDone && (
+            <p id="banner" className="banner">
+              🎉 {config.finalMessage ?? "You did it!"}
+            </p>
+          )}
+        </section>
+
+        {schools && (
+          <ol className="timeline">
+            {schools.map((school, i) => (
+              <SchoolItem key={school.id} school={school} painting={paintingFor(i)} onToggle={toggle} />
+            ))}
+          </ol>
+        )}
+      </main>
 
       {toast && (
         <p id="toast" className="toast" role="status">
           {toast}
         </p>
       )}
-    </main>
+    </>
   );
 }

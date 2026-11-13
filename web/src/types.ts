@@ -2,7 +2,9 @@
 
 export interface School {
   id: string;
-  name: string;
+  name: string; // short name she uses, e.g. "UTSW"
+  full_name?: string;
+  location?: string; // city
   sort_order: number;
   done: boolean;
   interview_date?: string; // "YYYY-MM-DD"

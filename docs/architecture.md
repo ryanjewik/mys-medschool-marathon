@@ -56,7 +56,10 @@ The frontend (`web/`) and the Lambda (`api/`) are already written and depend on 
 - **The built site:** the contents of `web/dist/` (from `npm run build`), uploaded with
   correct `Content-Type`s.
 - **DynamoDB table:** partition key `id` (string). One item per school with
-  `id`, `name`, `sort_order` (number), `done` (bool), and optionally `interview_date` (`"YYYY-MM-DD"`).
+  `id`, `name`, `sort_order` (number), `done` (bool), and optionally `interview_date` (`"YYYY-MM-DD"`),
+  `full_name` and `location`. The real list is in `data/schools.json` (the dev mock API reads it
+  too), so `data.tf` can load it with `jsondecode(file("${path.module}/../data/schools.json"))`
+  instead of repeating it in `terraform.tfvars`.
 - **Lambda:** runtime `python3.13`, handler `handler.handler`, code zipped from `api/`
   (leave out `tests/`, `.venv/`, `__pycache__/`, `.pytest_cache/`, `.ruff_cache/`,
   `requirements-dev.txt`, `pyproject.toml`). boto3 is built into the runtime, so nothing

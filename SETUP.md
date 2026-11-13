@@ -70,7 +70,8 @@ If you used SSO with a named profile, run `export AWS_PROFILE=<profile-name>` be
 ## 6. Write the Terraform
 
 - [ ] Write it in `infra/`, following `docs/architecture.md`
-- [ ] Put real values (her name, the school list, your email) in `infra/terraform.tfvars`.
+- [ ] Put real values (her name, your email) in `infra/terraform.tfvars`. The school list
+  lives in `data/schools.json`.
   It's git-ignored on purpose, so keep it out of GitHub.
 
 ## 7. Try it locally, then build the frontend

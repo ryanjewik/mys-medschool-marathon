@@ -1,0 +1,128 @@
+[
+  {
+    "id": "utmb",
+    "name": "UTMB",
+    "full_name": "UTMB John Sealy School of Medicine",
+    "location": "Galveston",
+    "interview_date": "2026-09-23",
+    "sort_order": 0,
+    "done": true
+  },
+  {
+    "id": "mcgovern",
+    "name": "McGovern",
+    "full_name": "McGovern Medical School at UTHealth Houston",
+    "location": "Houston",
+    "interview_date": "2026-09-25",
+    "sort_order": 1,
+    "done": true
+  },
+  {
+    "id": "long-som",
+    "name": "Long SOM",
+    "full_name": "UT Health San Antonio Long School of Medicine",
+    "location": "San Antonio",
+    "interview_date": "2026-10-02",
+    "sort_order": 2,
+    "done": true
+  },
+  {
+    "id": "ut-rgv",
+    "name": "UT RGV",
+    "full_name": "UTRGV School of Medicine",
+    "location": "Edinburg",
+    "interview_date": "2026-10-07",
+    "sort_order": 3,
+    "done": true
+  },
+  {
+    "id": "dell-med",
+    "name": "Dell Med",
+    "full_name": "Dell Medical School at UT Austin",
+    "location": "Austin",
+    "interview_date": "2026-10-08",
+    "sort_order": 4,
+    "done": true
+  },
+  {
+    "id": "ttu-lubbock",
+    "name": "TTU Lubbock",
+    "full_name": "Texas Tech University HSC School of Medicine",
+    "location": "Lubbock",
+    "interview_date": "2026-10-14",
+    "sort_order": 5,
+    "done": true
+  },
+  {
+    "id": "foster-som",
+    "name": "Foster SOM",
+    "full_name": "Paul L. Foster School of Medicine, TTUHSC El Paso",
+    "location": "El Paso",
+    "interview_date": "2026-10-29",
+    "sort_order": 6,
+    "done": true
+  },
+  {
+    "id": "tcom",
+    "name": "TCOM",
+    "full_name": "Texas College of Osteopathic Medicine",
+    "location": "Fort Worth",
+    "interview_date": "2026-10-30",
+    "sort_order": 7,
+    "done": true
+  },
+  {
+    "id": "tamu",
+    "name": "TAMU",
+    "full_name": "Texas A&M University School of Medicine",
+    "location": "Bryan–College Station",
+    "interview_date": "2026-11-04",
+    "sort_order": 8,
+    "done": true
+  },
+  {
+    "id": "uh",
+    "name": "UH",
+    "full_name": "Tilman J. Fertitta Family College of Medicine at UH",
+    "location": "Houston",
+    "interview_date": "2026-11-06",
+    "sort_order": 9,
+    "done": true
+  },
+  {
+    "id": "baylor",
+    "name": "Baylor",
+    "full_name": "Baylor College of Medicine",
+    "location": "Houston",
+    "interview_date": "2026-11-06",
+    "sort_order": 10,
+    "done": true
+  },
+  {
+    "id": "ut-tyler",
+    "name": "UT Tyler",
+    "full_name": "UT Tyler School of Medicine",
+    "location": "Tyler",
+    "interview_date": "2026-11-12",
+    "sort_order": 11,
+    "done": false
+  },
+  {
+    "id": "shsu",
+    "name": "SHSU",
+    "full_name": "Sam Houston State University College of Osteopathic Medicine",
+    "location": "Conroe",
+    "interview_date": "2026-11-13",
+    "sort_order": 12,
+    "done": false
+  },
+  {
+    "id": "utsw",
+    "name": "UTSW",
+    "full_name": "UT Southwestern Medical School",
+    "location": "Dallas",
+    "interview_date": "2026-11-18",
+    "sort_order": 13,
+    "done": false
+  }
+]
