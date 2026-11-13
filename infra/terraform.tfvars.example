@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars (git-ignored) and fill in.
+her_name      = "My"
+final_message = "Every interview done. I'm so proud of you."
+budget_email  = "you@example.com"

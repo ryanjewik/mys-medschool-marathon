@@ -70,9 +70,9 @@ If you used SSO with a named profile, run `export AWS_PROFILE=<profile-name>` be
 ## 6. Write the Terraform
 
 - [ ] Write it in `infra/`, following `docs/architecture.md`
-- [ ] Put real values (her name, your email) in `infra/terraform.tfvars`. The school list
-  lives in `data/schools.json`.
-  It's git-ignored on purpose, so keep it out of GitHub.
+- [ ] Copy `infra/terraform.tfvars.example` to `infra/terraform.tfvars` and put real values
+  (her name, the final message, your email) in it. It's git-ignored on purpose, so keep it
+  out of GitHub. The school list lives in `data/schools.json`.
 
 ## 7. Try it locally, then build the frontend
 
@@ -109,6 +109,7 @@ API_TARGET=https://dxxxx.cloudfront.net npm run dev
 
 ## 8. Deploy
 
+- [ ] Point the CLI at the deploy user (PowerShell: `$env:AWS_PROFILE="mys-deploy"`).
 - [ ] Download the providers:
 
 ```bash
