@@ -1,16 +1,18 @@
-/* Colours taken from the Rome background: sky, clouds, travertine, terracotta, pines. */
+/* Colours taken from the Rome background, brightened: sky, clouds, travertine, terracotta, pines. */
 :root {
-  --sky: #4da3df;
-  --parchment: #fbf6e9;
-  --cream: #f4ead0;
-  --stone: #dcbf86;
-  --terracotta: #b4552d;
-  --terracotta-soft: #f1d6c2;
-  --pine: #173a36;
-  --pine-muted: #4b625e;
-  --olive: #4c7a3d;
-  --olive-soft: #e0ebd3;
-  --shadow: rgb(23 58 54 / 0.28);
+  --sky: #6cc4f5;
+  --sky-soft: #dff2fd;
+  --cloud: #fffdf8;
+  --peach: #ffe6cf;
+  --coral: #ff8a65;
+  --coral-ink: #d4532c; /* coral dark enough for small text */
+  --leaf: #5fbf6a;
+  --leaf-soft: #e3f6e3;
+  --leaf-ink: #3a8f46;
+  --ink: #2f4a5a;
+  --ink-soft: #667d89;
+  --shadow: rgb(47 74 90 / 0.18);
+  --font-round: "Fredoka Variable", "Nunito Variable", system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -21,8 +23,8 @@
 body {
   margin: 0;
   background: var(--sky);
-  color: var(--pine);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  font: 16px/1.5 "Nunito Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 /* A fixed layer rather than background-attachment: fixed, which iOS Safari ignores. */
@@ -43,64 +45,70 @@ main {
 .intro {
   max-width: 560px;
   margin: 0 auto;
-  padding: 24px 22px;
-  border: 2px solid var(--stone);
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--parchment) 94%, transparent);
-  box-shadow: 0 10px 30px var(--shadow);
+  padding: 26px 24px 24px;
+  border: 3px solid var(--cloud);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--cloud) 93%, transparent);
+  box-shadow: 0 12px 32px var(--shadow);
+  text-align: center;
 }
 
 .eyebrow {
+  display: inline-block;
   margin: 0;
-  color: var(--terracotta);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--peach);
+  color: var(--coral-ink);
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 h1 {
-  margin: 4px 0 8px;
-  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  font-size: clamp(2rem, 7vw, 2.75rem);
+  margin: 12px 0 6px;
+  font-family: var(--font-round);
+  font-size: clamp(2.1rem, 8vw, 3rem);
+  font-weight: 600;
   line-height: 1.1;
 }
 
 .lede {
   margin: 0 0 20px;
-  color: var(--pine-muted);
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 
 .progress p,
 .status {
-  margin: 8px 0 0;
-  color: var(--pine-muted);
-  font-size: 0.9rem;
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
 .bar {
-  height: 12px;
+  height: 16px;
+  padding: 3px;
   border-radius: 999px;
-  background: var(--terracotta-soft);
-  overflow: hidden;
+  background: var(--peach);
 }
 
 .bar-fill {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: var(--olive);
+  background: linear-gradient(90deg, var(--leaf), var(--sky));
   transition: width 0.5s ease;
 }
 
 .banner {
-  margin: 20px 0 0;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: var(--olive-soft);
-  color: var(--olive);
-  font-weight: 600;
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: var(--leaf-soft);
+  color: var(--leaf-ink);
+  font-weight: 800;
 }
 
 /* Timeline. Phones: one rail down the left. Wide screens: a centre line, cards alternating. */
@@ -116,13 +124,13 @@ h1 {
 .timeline::before {
   content: "";
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: 12px;
+  bottom: 12px;
   left: 15px;
   width: 4px;
   border-radius: 2px;
-  background: var(--cream);
-  box-shadow: 0 0 0 2px rgb(23 58 54 / 0.35);
+  background: repeating-linear-gradient(to bottom, var(--cloud) 0 10px, transparent 10px 18px);
+  filter: drop-shadow(0 0 2px rgb(47 74 90 / 0.5));
 }
 
 .stop {
@@ -139,31 +147,41 @@ h1 {
 .stop-dot {
   grid-area: dot;
   position: relative;
+  display: grid;
+  place-items: center;
   justify-self: center;
-  width: 20px;
-  height: 20px;
-  border: 3px solid var(--pine);
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--sky);
   border-radius: 50%;
-  background: var(--cream);
+  background: var(--cloud);
+  box-shadow: 0 2px 6px var(--shadow);
+  color: var(--cloud);
+  font-size: 0.75rem;
+  font-weight: 900;
 }
 
 .stop.done .stop-dot {
-  border-color: var(--cream);
-  background: var(--olive);
+  border-color: var(--cloud);
+  background: var(--leaf);
+}
+
+.stop.done .stop-dot::after {
+  content: "✓";
 }
 
 .stop.today .stop-dot {
-  border-color: var(--cream);
-  background: var(--terracotta);
+  border-color: var(--cloud);
+  background: var(--coral);
   animation: pulse 1.6s ease-out infinite;
 }
 
 @keyframes pulse {
   from {
-    box-shadow: 0 0 0 0 rgb(180 85 45 / 0.6);
+    box-shadow: 0 0 0 0 rgb(255 138 101 / 0.7);
   }
   to {
-    box-shadow: 0 0 0 12px rgb(180 85 45 / 0);
+    box-shadow: 0 0 0 12px rgb(255 138 101 / 0);
   }
 }
 
@@ -172,17 +190,15 @@ h1 {
   justify-self: start;
   padding: 3px 12px;
   border-radius: 999px;
-  background: var(--parchment);
+  background: var(--cloud);
   box-shadow: 0 2px 8px var(--shadow);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .stop.today .stop-date {
-  background: var(--terracotta);
-  color: var(--parchment);
+  background: var(--coral);
+  color: var(--cloud);
 }
 
 .stop-card {
@@ -192,18 +208,18 @@ h1 {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-height: 128px;
+  min-height: 124px;
   padding: 18px;
   overflow: hidden;
-  border: 2px solid var(--stone);
-  border-radius: 18px;
-  box-shadow: 0 8px 24px var(--shadow);
+  border: 3px solid var(--cloud);
+  border-radius: 24px;
+  box-shadow: 0 8px 22px var(--shadow);
   cursor: pointer;
   transition: transform 0.2s;
 }
 
 .stop-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) rotate(-0.6deg);
 }
 
 /* The painting. Faded until she checks the school off, then it comes into full colour. */
@@ -213,15 +229,15 @@ h1 {
   inset: 0;
   z-index: -2;
   background: var(--painting) center / cover;
-  filter: saturate(0.3) brightness(1.08);
+  filter: saturate(0.35) brightness(1.12);
   transition: filter 0.8s ease;
 }
 
 .stop.done .stop-card::before {
-  filter: none;
+  filter: saturate(1.15) brightness(1.05);
 }
 
-/* Parchment fading out to the right, so the text reads and the painting still shows. */
+/* Cloud-white fading out to the right, so the text reads and the painting still shows. */
 .stop-card::after {
   content: "";
   position: absolute;
@@ -229,9 +245,9 @@ h1 {
   z-index: -1;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--parchment) 90%, transparent) 0%,
-    color-mix(in srgb, var(--parchment) 72%, transparent) 45%,
-    color-mix(in srgb, var(--parchment) 0%, transparent) 85%
+    color-mix(in srgb, var(--cloud) 92%, transparent) 0%,
+    color-mix(in srgb, var(--cloud) 82%, transparent) 55%,
+    color-mix(in srgb, var(--cloud) 0%, transparent) 100%
   );
 }
 
@@ -240,38 +256,38 @@ h1 {
   width: 26px;
   height: 26px;
   margin: 0;
-  accent-color: var(--olive);
+  accent-color: var(--leaf);
   cursor: pointer;
 }
 
 .stop-text {
   display: grid;
   gap: 2px;
-  text-shadow: 0 0 6px var(--parchment), 0 0 2px var(--parchment);
 }
 
 .stop-name {
-  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-family: var(--font-round);
   font-size: 1.45rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.15;
 }
 
 .stop-full {
-  color: var(--pine-muted);
-  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
   line-height: 1.3;
 }
 
 .stop-meta {
   margin-top: 4px;
-  color: var(--terracotta);
-  font-size: 0.8rem;
-  font-weight: 700;
+  color: var(--coral-ink);
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .stop.done .stop-meta {
-  color: var(--olive);
+  color: var(--leaf-ink);
 }
 
 @media (min-width: 860px) {
@@ -305,9 +321,207 @@ h1 {
   margin: 0;
   padding: 12px 16px;
   border-radius: 10px;
-  background: var(--pine);
-  color: var(--parchment);
+  background: var(--ink);
+  color: var(--cloud);
   font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* The lock screen shown before anything else. */
+.lock {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(20 32 42 / 0.3);
+  backdrop-filter: blur(6px);
+}
+
+.lock-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: min(420px, 100%);
+  padding: 30px 26px 26px;
+  border: 3px solid var(--cloud);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--cloud) 95%, transparent);
+  box-shadow: 0 16px 40px var(--shadow);
+  text-align: center;
+  animation: card-pop 0.45s cubic-bezier(0.3, 1.5, 0.6, 1) both;
+}
+
+/* card-pop stays in the list so it doesn't replay when the shake class comes and goes. */
+.lock-card.shake {
+  animation:
+    card-pop 0.45s cubic-bezier(0.3, 1.5, 0.6, 1) both,
+    shake 0.4s ease both;
+}
+
+.lock-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--peach);
+  font-size: 2.4rem;
+  animation: wiggle 2.4s ease-in-out infinite;
+}
+
+.lock-icon.open {
+  background: var(--leaf-soft);
+  animation: card-pop 0.4s cubic-bezier(0.3, 1.8, 0.6, 1) both;
+}
+
+.lock-question {
+  font: 600 1.45rem/1.25 var(--font-round);
+}
+
+.lock-input {
+  width: 100%;
+  padding: 12px 18px;
+  border: 3px solid var(--peach);
+  border-radius: 999px;
+  outline: none;
+  background: var(--cloud);
+  color: var(--ink);
+  font: 700 1.1rem "Nunito Variable", system-ui, sans-serif;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.lock-input:focus {
+  border-color: var(--sky);
+}
+
+.lock-input[aria-invalid="true"] {
+  border-color: var(--coral);
+}
+
+.lock-hint {
+  margin: -4px 0 0;
+  color: var(--coral-ink);
+  font-weight: 800;
+}
+
+.lock-button {
+  padding: 12px 28px;
+  border: 3px solid var(--cloud);
+  border-radius: 999px;
+  background: var(--coral);
+  box-shadow: 0 8px 22px var(--shadow);
+  color: var(--cloud);
+  font: 700 1.15rem var(--font-round);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.lock-button:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+@keyframes shake {
+  20%,
+  60% {
+    translate: -10px 0;
+  }
+  40%,
+  80% {
+    translate: 10px 0;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  80%,
+  100% {
+    rotate: 0deg;
+  }
+  85% {
+    rotate: -12deg;
+  }
+  90% {
+    rotate: 10deg;
+  }
+  95% {
+    rotate: -6deg;
+  }
+}
+
+.reopen {
+  display: block;
+  margin: 40px auto 0;
+  padding: 12px 24px;
+  border: 3px solid var(--cloud);
+  border-radius: 999px;
+  background: var(--coral);
+  box-shadow: 0 8px 22px var(--shadow);
+  color: var(--cloud);
+  font: 700 1.1rem var(--font-round);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.reopen:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+/* The final card: over everything on the page (confetti included), under the cats. */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(20 32 42 / 0.65);
+  animation: fade-in 0.3s ease both;
+}
+
+.modal-card {
+  position: relative;
+  width: min(564px, 100%);
+  animation: card-pop 0.45s cubic-bezier(0.3, 1.5, 0.6, 1) both;
+}
+
+.modal-card img {
+  display: block;
+  width: 100%;
+  max-height: calc(100dvh - 32px);
+  object-fit: contain;
+  border: 6px solid var(--cloud);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.4);
+}
+
+.modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--cloud);
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 4px 12px var(--shadow);
+  color: var(--cloud);
+  font: 700 1.5rem/1 var(--font-round);
+  cursor: pointer;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes card-pop {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
 }
 
 /* Always the top layer, above confetti and everything else. Clicks pass straight through. */
@@ -338,12 +552,18 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .bar-fill,
   .stop-card,
-  .stop-card::before {
+  .stop-card::before,
+  .reopen,
+  .lock-button {
     transition: none;
   }
 
   .stop.today .stop-dot,
-  .cat {
+  .cat,
+  .modal,
+  .modal-card,
+  .lock-card,
+  .lock-icon {
     animation: none;
   }
 }

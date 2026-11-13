@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getConfig, listSchools, setDone } from "./api";
 import { bigCelebration, burstFrom } from "./confetti";
 import { Cats } from "./components/Cats";
 import { CelebrationMusic } from "./components/CelebrationMusic";
+import { FinalCard } from "./components/FinalCard";
 import { ProgressBar } from "./components/ProgressBar";
 import { SchoolItem } from "./components/SchoolItem";
 import { paintingFor } from "./paintings";
@@ -14,6 +15,8 @@ export default function App() {
   const [schools, setSchools] = useState<School[] | null>(null); // null = still loading
   const [loadFailed, setLoadFailed] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [showCard, setShowCard] = useState(false); // the final card; only ever shown once all are done
+  const closeCard = useCallback(() => setShowCard(false), []);
 
   // Load once. `cancelled` keeps StrictMode's dev-only double run from celebrating twice.
   useEffect(() => {
@@ -23,7 +26,10 @@ export default function App() {
         if (cancelled) return;
         setConfig(cfg);
         setSchools(list);
-        if (list.length > 0 && list.every((s) => s.done)) bigCelebration();
+        if (list.length > 0 && list.every((s) => s.done)) {
+          bigCelebration();
+          setShowCard(true);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -56,7 +62,10 @@ export default function App() {
     if (done) {
       playTongue();
       burstFrom(origin);
-      if (schools.every((s) => (s.id === id ? done : s.done))) bigCelebration();
+      if (schools.every((s) => (s.id === id ? done : s.done))) {
+        bigCelebration();
+        setShowCard(true);
+      }
     }
 
     try {
@@ -77,6 +86,7 @@ export default function App() {
       {allDone && (
         <>
           <CelebrationMusic />
+          {showCard && <FinalCard onClose={closeCard} />}
           <Cats />
         </>
       )}
@@ -110,6 +120,12 @@ export default function App() {
               <SchoolItem key={school.id} school={school} painting={paintingFor(i)} onToggle={toggle} />
             ))}
           </ol>
+        )}
+
+        {allDone && !showCard && (
+          <button type="button" className="reopen" onClick={() => setShowCard(true)}>
+            💌 See your card again
+          </button>
         )}
       </main>
 
